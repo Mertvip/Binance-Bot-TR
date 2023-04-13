@@ -30,22 +30,27 @@ while True:
         if last_price > ema_long and last_price > ema_short:
             # Alım yap
             quantity = 0.1 # Örnek miktar, kendinize göre ayarlayın
+            buy_price = 0.05000000 # Almak istediğiniz fiyat
             buy_order = client.create_order(
                 symbol=coin,
                 side='BUY',
-                type='MARKET',
+                type='LIMIT',
+                timeInForce='GTC', # Kalıcı olarak beklet
+                price=buy_price,
                 quantity=quantity
             )
-            print(f'Bought {quantity} {coin} at {last_price}')
+            print(f'Bought {quantity} {coin} at {buy_price}')
         elif last_price < ema_long and last_price < ema_short:
             # Satım yap
+            sell_price = 0.05500000 # Satmak istediğiniz fiyat
             sell_order = client.create_order(
                 symbol=coin,
                 side='SELL',
-                type='MARKET',
+                type='LIMIT',
+                timeInForce='GTC', # Kalıcı olarak beklet
+                price=sell_price,
                 quantity=quantity
             )
-            print(f'Sold {quantity} {coin} at {last_price}')
+            print(f'Sold {quantity} {coin} at {sell_price}')
     
-    # Belirli bir süre beklet
-    time.sleep(60) # 60 saniye beklet, kendinize göre ayarlayın
+    # Belirli bir süre
