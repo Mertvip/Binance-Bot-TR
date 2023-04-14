@@ -53,4 +53,5 @@ while True:
             )
             print(f'Sold {quantity} {coin} at {sell_price}')
     
-    # Belirli bir süre
+    # Belirli bir süre içinde AL-SAT yapması için
+    time.sleep(40)
